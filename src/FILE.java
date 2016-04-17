@@ -10,9 +10,8 @@ public class FILE {
 		
 			int arrayLength = (data.length()/15)*16;
 			
-			if(data.length()%15 != 0 && data.length() > arrayLength)
+			if(data.length()%15 != 0)
 				arrayLength += 16;
-			
 			
 	        char[] returnData = new char[arrayLength];
 	        
@@ -24,7 +23,7 @@ public class FILE {
 	        
 	        for(int a=0; a<arrayLength; a++){
 	       
-	        	if(a >= toBeDivided.length+1){
+	        	if(pointer == toBeDivided.length){
 	        		returnData[a] = '!';
 	        	}else if(a%16==0){
 	                returnData[a] = '0';   
@@ -38,7 +37,7 @@ public class FILE {
 	        }
 	      
 		    
-	        System.out.println(returnData);
+	        //System.out.println(returnData);
 		    //System.out.println(returnData.length);
 		    return returnData;
 	}  

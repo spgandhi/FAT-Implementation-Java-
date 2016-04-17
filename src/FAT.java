@@ -25,13 +25,8 @@ public class FAT {
 			return false;
 		}
 		
-		//System.out.println(checkIfFileExists(fileName));
-			
-		
 		String[] e = new String[4];
 		
-		//System.out.println("Next free block is " + this.nextFreeBlock);
-		//	Array For File
 		e[0] = fileName;
 		e[1] = String.valueOf(this.nextFreeBlock);
 		e[2] = String.valueOf(1);
@@ -39,12 +34,11 @@ public class FAT {
 
 		// Adding file to the File ArrayList
 		this.files.add(e);
-		//System.out.println("Created a new file with name " + e[0] + " starting at " + e[1] + " of size " + e[2] );
+	
 		
 		// Pointing the end of file to index 0 whose value will be -1		
 		FATTable[Integer.parseInt(e[1])] = -1;
 		
-		//updateNextFreeBlock();
 		return true;
 	}
 
@@ -74,20 +68,14 @@ public class FAT {
 	
 	public void saveFile(String fileName, char[] newData, int latestVersion){
 		
-		//System.out.println(this.nextFreeBlock);
-		
 		this.setVersion(fileName, latestVersion);
 		int currentBlock = getFileStart(fileName);
 		int oldBlockSize = getFileSize(fileName);
 		int newBlockSize = newData.length;
 		
-		
-	//	System.out.println(currentBlock);
 		System.out.println("newBlockSize is " + newBlockSize);
 		for(int i=0; i < newBlockSize/16; i++){
-			
-			System.out.println("Current block is " + currentBlock + "and its value is " + FATTable[currentBlock]);
-			
+					
 			if(FATTable[currentBlock] != -1){
 				
 				for(int j=0; j<15;j++){
@@ -95,16 +83,15 @@ public class FAT {
 				}
 				
 			}else{
-				System.out.println("updating");
+				
 				updateNextFreeBlock();
 				FATTable[currentBlock] = this.nextFreeBlock;
 				FATTable[this.nextFreeBlock] = -1;
 				
 				int dataStart = currentBlock*16;
-				//System.out.println(newData);
+				
 				addData(i*16, newData, dataStart);
 				
-				//System.out.println("next free block is " + this.nextFreeBlock);
 			}
 			
 			if(i==newBlockSize-1){
@@ -118,17 +105,13 @@ public class FAT {
 				currentBlock = FATTable[currentBlock];
 		}
 		
-		//System.out.println("Setting file size " + newData.length);
 		this.setFileSize(fileName, newData.length/16);
 	}
 	
 	private void addData(int startPoint, char[] newData, int dataStart) {
-		//System.out.println(newData );
+		
 		for(int i=0;i<16;i++){
-			
 			data[dataStart + i] = newData[startPoint + i];
-			//System.out.println(dataStart);
-			//System.out.println("Added character " + data[dataStart+i] + " at position " + String.valueOf(dataStart+i));
 		}
 		
 	}
@@ -142,11 +125,8 @@ public class FAT {
 			return temp;
 		}
 		
-		System.out.println("Reading file " + fileName + " whose start point is " + startPoint);
-		
 		int fileSize = getFileSize(fileName);
 		char[] returnData = new char[fileSize*16];
-		System.out.println("File size is " + fileSize);
 		
 		for(int i=0; i<fileSize; i++){
 			
@@ -174,7 +154,6 @@ public class FAT {
 	
 	private int getFileStart(String fileName) {
 		
-		//System.out.println("Searching for " + fileName);
 		for (String[] file : this.files){
 			if (file[0] == fileName)
 				return Integer.parseInt(file[1]);
