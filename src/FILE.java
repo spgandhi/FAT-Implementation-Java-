@@ -24,7 +24,7 @@ public class FILE {
 	        for(int a=0; a<arrayLength; a++){
 	       
 	        	if(pointer == toBeDivided.length){
-	        		returnData[a] = '!';
+	        		returnData[a] = '/';
 	        	}else if(a%16==0){
 	                returnData[a] = '0';   
 	        	}else{		
@@ -37,9 +37,26 @@ public class FILE {
 	        }
 	      
 		    
-	        //System.out.println(returnData);
+	        System.out.println(returnData);
 		    //System.out.println(returnData.length);
 		    return returnData;
 	}  
+	
+	public char[] reformat(char[] data){
+		char[] returnData = new char[data.length - data.length/16];
+		
+		int j=0;
+		for(int i=0; i<data.length; i++){
+			
+			if(i%16 != 0){
+				if(data[i] != '/')
+					returnData[j] = data[i];
+				j++;
+			}
+		}
+		
+		return returnData;
+		
+	}
 		
 }
