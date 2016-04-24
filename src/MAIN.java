@@ -15,8 +15,9 @@ public class MAIN {
 //		System.out.println("To read an older input - 'read filenamne versionNo'");
 //		System.out.println("If you wish to delete a file, input - 'delete filename'");
 		
-		fat.CreateFile("Shreyans");
-		fat.saveFile("Shreyans", file.formatData("hello is the new power ti thihida djas diasid aihs dihas dhi as"), 0 );
+//		fat.CreateFile("Shreyans");
+//		fat.saveFile("Shreyans", file.formatData("hello is the new power ti thihida djas diasid aihs dihas dhi as"), 0 );
+//		fat.allFATS();
 //		//fat.readFile("Shreyans");
 //		
 //		fat.CreateFile("Vivek");
@@ -25,50 +26,53 @@ public class MAIN {
 //		
 //		fat.saveFile("Shreyans", file.formatData("hello"), 0 );
 //		System.out.println(file.reformat(fat.readFile("Shreyans")));
-		fat.allData();
-		fat.allFATS();
+//		System.out.println(file.reformat(fat.readFile("Vivek")));
+//		System.out.println(fat.nextFreeBlock);
+//		fat.allData();
+//		fat.allFATS();
+//		System.out.println(fat.readFile("Vivek"));
 		
-//		while(true){
-//			
-//			System.out.println("$ ");
-//			Scanner sc=new Scanner(System.in);
-//			String[] command = sc.nextLine().trim().split(" ");
-//			
-//			System.out.println(command[0]);
-//			if(command[0].equals("quit"))
-//				break;
-//			
-//			if(command[0].equals("all"))
-//				fat.allData();
-//			
-//			if(command.length > 3 || command.length<2){
-//				System.out.println("Sorry wrong input. Please try again.");
-//				continue;
-//			}
-//			
-//			if(command[0].equals("create")){
-//				if( fat.CreateFile(command[1]) ){
-//					System.out.println(command[1] + " file has been created. Please type the content below.");
-//					fat.saveFile(command[1], file.formatData( sc.nextLine() ), 0);
-//				}else{
-//					System.out.println("Sorry the file already exists.Please create a file with a different name");
-//					continue;
-//				}
-//					
-//			}else if(command[0].equals("read")){
-//				if( fat.checkIfFileExists(command[1]) ){
-//					System.out.println(file.reformat(fat.readFile(command[1])));
-//				}else{
-//					System.out.println("Sorry the file does not exist. Pleas enter a valid file.");
-//				}
-//			}else if(command[0].equals("edit")){
-//				if(fat.checkIfFileExists(command[1])){
-//					System.out.println("Please enter the new text");
-//					fat.saveFile(command[1], file.formatData(sc.nextLine()), 0);
-//				}else{
-//					System.out.println("Sorry the file does not exist. Please enter a valid file name");
-//				}
-//			}
-//		}
+		while(true){
+			
+			System.out.println("$ ");
+			Scanner sc=new Scanner(System.in);
+			String[] command = sc.nextLine().trim().split(" ");
+			
+			System.out.println(command[0]);
+			if(command[0].equals("quit"))
+				break;
+			
+			if(command[0].equals("all"))
+				fat.allData();
+			
+			if(command.length > 3 || command.length<2){
+				System.out.println("Sorry wrong input. Please try again.");
+				continue;
+			}
+			
+			if(command[0].equals("create")){
+				if( fat.CreateFile(command[1]) ){
+					System.out.println(command[1] + " file has been created. Please type the content below.");
+					fat.saveFile(command[1], file.formatData( sc.nextLine() ), 0);
+				}else{
+					System.out.println("Sorry the file already exists.Please create a file with a different name");
+					continue;
+				}
+					
+			}else if(command[0].equals("read")){
+				if( fat.checkIfFileExists(command[1]) ){
+					System.out.println(file.reformat(fat.readFile(command[1])));
+				}else{
+					System.out.println("Sorry the file does not exist. Pleas enter a valid file.");
+				}
+			}else if(command[0].equals("edit")){
+				if(fat.checkIfFileExists(command[1])){
+					System.out.println("Please enter the new text");
+					fat.saveFile(command[1], file.formatData(sc.nextLine()), 0);
+				}else{
+					System.out.println("Sorry the file does not exist. Please enter a valid file name");
+				}
+			}
+		}
 	}
 }
